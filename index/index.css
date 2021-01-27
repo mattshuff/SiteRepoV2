@@ -1,0 +1,28 @@
+/* Main Elements */
+body {
+  
+}
+header{
+    width: 70%;
+    display:block;
+}
+.content{
+    display: flex;
+}
+.tools{
+    flex-grow: 1;
+}
+.tool_link{
+    display: block;
+}
+
+/* News CSS */
+.news{
+    flex-grow: 5;
+}
+.news_wrapper{
+    display: flex;
+}
+.news_feed{
+    padding: 10px;
+}

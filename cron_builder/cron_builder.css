@@ -1,0 +1,18 @@
+.controls_wrapper{
+    display:flex;
+    padding-bottom: 50px;
+
+    min-height: 140;
+}
+.result_wrapper{
+    padding-top: 40px;
+    text-align:center;
+    flex-grow: 1;
+    width: 80%;
+}
+.result{
+    flex-grow: 2;
+    font-size: 55px;
+    margin:auto;
+    padding-left: 30px;
+}
