@@ -2,19 +2,29 @@
     font-family: 'Poppins', sans-serif;
     
 }
-
 /* Media Queries */
 
 /* mobile to tablets */
 @media all and (max-width: 1200px) and (min-width: 0) {
     *{
-    color: red;
+    color: grey;
+    }
+    header {
+        width: 100% !important;
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+    .container{
+        width: 100%;
+        flex-direction: column;
     }
 }
 
 /* monitors */
 @media screen and (min-width: 1201px) {
     *{
-        color: yellow;
+        color: darkgrey;
     }
 }
