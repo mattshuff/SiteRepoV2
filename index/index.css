@@ -12,9 +12,13 @@ header{
 .tools{
     flex-grow: 1;
 }
-.tool_link{
+.tool_link {
     display: block;
+    text-decoration: none;
 }
+a, a:visited, a:hover, a:active {
+    color: inherit;
+  }
 
 /* News CSS */
 .news{

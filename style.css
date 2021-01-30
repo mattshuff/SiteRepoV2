@@ -1,0 +1,20 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+/* Media Queries */
+
+/* mobile to tablets */
+@media all and (max-width: 1200px) and (min-width: 0) {
+    *{
+    color: red;
+    }
+}
+
+/* monitors */
+@media screen and (min-width: 1201px) {
+    *{
+        color: yellow;
+    }
+}
