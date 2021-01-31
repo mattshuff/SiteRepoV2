@@ -1,3 +1,3 @@
 <?php
-    exec('python test.py');
+    echo(exec('python test.py'));
 ?>
