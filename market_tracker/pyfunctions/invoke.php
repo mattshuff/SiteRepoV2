@@ -1,3 +1,5 @@
 <?php
-    echo(exec('python test.py'));
+ echo 123;
+    echo(shell_exec('python test.py'));
+
 ?>

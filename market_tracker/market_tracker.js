@@ -1,5 +1,5 @@
 $(document).ready(function() {
-$.get("pyfunctions/test.php",testfunc())
+$.get("pyfunctions/invoke.php",testfunc())
 
 })
 
