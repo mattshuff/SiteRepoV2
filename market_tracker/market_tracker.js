@@ -1,9 +1,13 @@
 $(document).ready(function() {
-$.get("pyfunctions/invoke.php",testfunc())
+    $.ajax({
+        'url': './functions/invoke.php',
+        'type': 'post',
+        'dataType': 'html',
+    })
+    .done( function (response) {
+      console.log(response)
+    })
+  
 
 })
 
-function testfunc(data,status){
-console.log(status);
-console.log(data);
-}
