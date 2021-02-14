@@ -1,0 +1,11 @@
+.content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.job_posting{
+transition: all 1s ease;
+ min-width: 200px;
+ flex-grow: 1;
+ cursor:pointer
+}
