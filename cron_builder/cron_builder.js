@@ -57,3 +57,14 @@ function CronBuilder(event){
         }
     }
 }
+
+function reset(){
+    BuildingCron = []
+    
+    var result = document.getElementsByClassName("result")[0];
+    result.innerHTML = BuildingCron.join(" ");
+
+    var EnterPrompterh2 = document.getElementById("EnterPrompter");
+    EnterPrompterh2.innerHTML = Prompts[0]
+
+}
