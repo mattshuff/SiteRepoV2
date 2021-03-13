@@ -9,3 +9,15 @@ transition: all 1s ease;
  flex-grow: 1;
  cursor:pointer
 }
+
+.expanded {
+    width: 40%;
+    height: auto;
+    background-color: #8797AF;
+}
+::selection {
+    background: grey; /* WebKit/Blink Browsers */
+  }
+  ::-moz-selection {
+    background: grey; /* Gecko Browsers */
+  }

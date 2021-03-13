@@ -1,91 +1,98 @@
-$(document).ready(function() {
+var jobs_json;
+
+$(document).ready(function () {
     build_jobs()
 })
 
-function build_jobs(){
-    $(document).ready(function() {
+function build_jobs() {
+    $(document).ready(function () {
         $.ajax({
             'url': './functions/invoke.php',
             'type': 'post',
             'dataType': 'json',
         })
-        .done( function (response) {
-            build_jobs_resolved(response)
-        })
+            .done(function (response) {
+                build_jobs_resolved(response)
+                jobs_json = response
+            })
     })
 }
-function build_jobs_resolved(data){
+function build_jobs_resolved(data) {
     var MainContent = document.getElementsByClassName("content")[0];
 
-    for(var i = 0; i < data.length; i++){
+    for (var i = 0; i < data.length; i++) {
         //Keys of object: company, company_logo, created_at, description
         //how_to_apply, id, location, title, type, url
-        
+
         //get data by index and can access data from there 
-        console.log(data[i]["company"]);
 
         var TempDiv = document.createElement("div");
         TempDiv.classList.add("job_posting")
-    
+
         var TempHeader = document.createElement("h3");
         TempHeader.innerHTML = data[i]["company"];
         TempDiv.appendChild(TempHeader);
+        TempDiv.expanded = false;
 
         TempDiv.onclick = job_on_click;
+
 
         MainContent.appendChild(TempDiv);
     }
 }
 
 
-function job_on_click(self){
+function job_on_click(self) {
     self.cancelBubble = true;
 
-    var clicked_element = self.originalTarget;
-    var parent_div = self.originalTarget.parentElement;
-
-    var background_color = $(parent_div).css("background-color");
-
-    if(background_color=="rgb(0, 0, 0)"){
-        $(parent_div).css("width", "auto");
-        $(parent_div).css("background-color", "white");
-        clicked_element.style.color = 'black';
-
-        console.log($(parent_div).children())
-        $(parent_div).remove(1)
+    //get clicked element, go up through parents until main div is found
+    var target = self.target
+    var clicked_element = ""
+    while(target.classList.contains("job_posting") == false){
+        target = target.parentNode;
     }
-    else{
-    $(parent_div).css("width", "50%");
-    $(parent_div).css("background-color", "black");
-    clicked_element.style.color = 'white';
-    
-    // call jobs page, pass to function and append to box 
-    $.ajax({
-        'url': './functions/invoke.php',
-        'type': 'post',
-        'dataType': 'json',
-    })
-    .done( function (response) {
-        job_on_click_resolved(response,self)
-    })
-    }
-}
-function job_on_click_resolved(data,this_event){
-    var clicked_name = this_event.originalTarget.innerHTML;
-    
-    var matched_json_object = ""
-    for(var i = 0; i < data.length; i++){
-        if(data[i].company==clicked_name){
-            matched_json_object=data[i];
-            break;
+    clicked_element = target
+
+    //if element hasnt been expanded yet
+    if (clicked_element.expanded == false) {
+        clicked_element.classList.add("expanded")
+        clicked_element.expanded = true;
+
+        clicked_header = clicked_element.children[0]
+        company_json = "";
+
+        for (var i = 0; i < jobs_json.length; i++) {
+            if (jobs_json[i].company == clicked_header.innerHTML) {
+                company_json = jobs_json[i];
+            }
         }
+
+        //construct further info 
+        var parent_div = clicked_element;
+
+        job_title_header = document.createElement("h3")
+        job_title_header.textContent = company_json.title;
+        parent_div.appendChild(job_title_header)
+
+        job_desc_html_string = company_json.description;
+        var description_wrapper_div = document.createElement("div")
+        description_wrapper_div.innerHTML = job_desc_html_string
+        parent_div.appendChild(description_wrapper_div)
+
     }
-    
-    var job_description_span = document.createElement("span");
-    job_description_span.classList.add("job_posting")
-    job_description_span.innerHTML = matched_json_object.description;
 
-    var parent_div = this_event.originalTarget.parentElement;
-    parent_div.appendChild(job_description_span)
+    // if element has already been expanded
+    else if (clicked_element.expanded == true) {
 
+
+        while (clicked_element.childNodes.length > 1) {
+            clicked_element.removeChild(clicked_element.lastChild);
+        }
+        clicked_element.classList.remove("expanded")
+        clicked_element.expanded = false;
+    }
+
+    else {
+        console.log(clicked_element)
+    }
 }

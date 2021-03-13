@@ -4,7 +4,6 @@ from operator import itemgetter
 import json
 import requests
 import json
-import time
 import logging
 logging.basicConfig(level=logging.INFO)
 
@@ -33,13 +32,7 @@ if __name__ == "__main__":
             counter += 1
             final_list.append(Entry)
 
-    print(final_list)
     # Write response to file
     with open('cache.json', 'w', encoding='utf-8') as f:
         json.dump(final_list, f, ensure_ascii=False, indent=4)
-        
-    """
-    start = time.time()
-    end = time.time()
-    print(end - start)
-    """
+
